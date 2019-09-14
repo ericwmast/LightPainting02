@@ -1,2 +1,2 @@
 # LightPainting02
-Arduino FastLED
+Arduino FastLED project #2
