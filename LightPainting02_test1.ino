@@ -1,15 +1,15 @@
 #include <FastLED.h>
 
-#define DATA_PIN    6
-#define LED_TYPE    WS2812
+#define DATA_PIN    5
+const int BRIGHTNESS_PIN = 15;
+#define LED_TYPE    WS2812B
 #define COLOR_ORDER BRG
 #define NUM_LEDS    399
 CRGB leds[NUM_LEDS];
-const int BRIGHTNESS_PIN = 14;
 #define BRIGHTNESS          0
 #define FRAMES_PER_SECOND  120
 #define MAX_BRIGHTNESS 255
-#define MIN_BRIGHTNESS 15 
+#define MIN_BRIGHTNESS 10 
 
 long frameCount = 0;
  
@@ -17,10 +17,10 @@ int overallDelay = 10;
 int overallTime = 1000; //time in ms * delay (ex 1000 would be 10 seconds if our overall delay is 10)
 
 int aTime = overallTime;
-int bTime = overallTime/2;
+int bTime = overallTime;
 int cTime = overallTime/2;
 int dTime = overallTime;
-int eTime = overallTime/2.5;
+int eTime = overallTime;
 int fTime = overallTime;
 int gTime = overallTime;
 
@@ -79,46 +79,40 @@ void loop() {
   for(int i=0;i<49;i++){    //A
     int aCount = frameCount % aTime;
     int aHue = map(aCount, 0, aTime, 0, 255);
-    leds[i] = CHSV(aHue+(i*8),255,255);
+    leds[i] = CHSV(aHue+(i*4),255,255);
   }
-  for(int i=49;i<116;i++){    //B
+   for(int i=49;i<115;i++){    //B
     int bCount = frameCount % bTime;
-    int bHue = 0;
-    if (bCount < (bTime/2)){
-      bHue = map(bCount, 0, bTime/2, 160, 220);
-    }else{
-      bHue = map(bCount, bTime/2, bTime, 220, 160);
-    }
-    leds[i] = CHSV(bHue,255,255);
+    int bHue = map(bCount, 0, bTime, 0, 255);
+    leds[i] = CHSV(bHue+(i*1),255,255);
   }
-  for(int i=116;i<169;i++){    //C
+    for(int i=116;i<167;i++){    //C
     int cCount = frameCount % cTime;
     int cHue = map(cCount, 0, cTime, 0, 255);
-    leds[i] = CHSV(cHue+(i*12),255,255);
+    leds[i] = CHSV(cHue+(i*1),255,255);
   }
- for(int i=169;i<203;i++){    //D
+  for(int i=168;i<200;i++){    //D
     int dCount = frameCount % dTime;
     int dHue = map(dCount, 0, dTime, 0, 255);
-    int dValue = map(dCount, 0, dTime, 0, 255);
-    if (dCount < (dTime/2)){dValue = map(dCount, 0, dTime/2, 0, 255);}
-    else{dValue = map(dCount, dTime/5, dTime, 255, 0);}
-    leds[i] = CHSV(dHue,255,dValue);
+    leds[i] = CHSV(dHue+(i*3),255,255);
   }
-  for(int i=204;i<284;i++){    //E
+   for(int i=201;i<280;i++){    //E
     int eCount = frameCount % eTime;
     int eHue = map(eCount, 0, eTime, 0, 255);
     leds[i] = CHSV(eHue+(i*2),255,255);
   }
-  for(int i=284;i<358;i++){    //F
+  for(int i=281;i<320;i++){    //F
     int fCount = frameCount % fTime;
     int fHue = map(fCount, 0, fTime, 0, 255);
-    leds[i] = CHSV(fHue+(i*2),255,255);
+    leds[i] = CHSV(fHue+(i*1),255,255);
   }
-  for(int i=358;i<399;i++){    //G
+  for(int i=321;i<399;i++){    //G
     int gCount = frameCount % gTime;
     int gHue = map(gCount, 0, gTime, 0, 255);
-    leds[i] = CHSV(gHue+(i*2),255,255);
+    leds[i] = CHSV(gHue+(i*1),255,255);
   }
+  
+  
   FastLED.show();
   FastLED.delay(1000/FRAMES_PER_SECOND); 
 
