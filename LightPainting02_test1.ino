@@ -1,3 +1,5 @@
+#define FASTLED_ALLOW_INTERRUPTS 0
+#define FASTLED_INTERNAL
 #include <FastLED.h>
 
 #define DATA_PIN    5
